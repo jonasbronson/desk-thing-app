@@ -1,9 +1,9 @@
 {
   "name": "desk-thing-app",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
-  "author": "Clipsey <contact@jonasbronson.com>",
+  "author": "Jonas Bronson <contact@jonasbronson.com>",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build && electron-builder",
@@ -45,20 +45,20 @@
         {
           "name": "@electron-forge/maker-zip",
           "config": {
-              "name": "desk-thing-app",
-              "authors": "Clipsey",
-              "description": "the ultimate desk companion"
+            "name": "desk-thing-app",
+            "authors": "Jonas Bronson",
+            "description": "the ultimate desk companion"
           },
           "platforms": [
-              "linux",
-              "win32"
+            "linux",
+            "win32"
           ]
         },
         {
           "name": "@electron-forge/maker-deb",
           "config": {
             "name": "desk-thing-app",
-            "authors": "Clipsey",
+            "authors": "Jonas Bronson",
             "description": "the ultimate desk companion"
           },
           "platforms": [
@@ -70,4 +70,3 @@
   },
   "main": "dist-electron/main.js"
 }
-
