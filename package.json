@@ -12,7 +12,8 @@
     "package": "electron-forge package",
     "make": "vue-tsc && vite build && electron-builder --linux deb --arm64 && electron-forge make",
     "make:arm64": "vue-tsc && vite build && electron-builder --linux deb --arm64 && electron-forge make --arch=arm64",
-    "make:deb:arm64": "vue-tsc && vite build && electron-builder --linux deb --arm64",
+    "make:builder:arm64": "vue-tsc && vite build && electron-builder --linux deb --arm64",
+    "make:forge:arm64": "vue-tsc && vite build && electron-forge make --arch=arm64",
     "app": "vue-tsc && vite build && electron-builder && electron-forge package && electron-forge make"
   },
   "dependencies": {
