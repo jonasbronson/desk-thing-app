@@ -1,29 +1,34 @@
 <script lang="ts">
-/*export default {
+
+export default {
+    data() {
+        return {
+            time: this.getTime(),
+            interval: null as any | null,
+        };
+    },
     methods: {
-        async loginToSpotify() {
-            try {
-                const tokens = await (window as any).ipcRenderer.invoke('spotify-start-auth-inplace')
-                console.log('Spotify tokens:', tokens)
-                // store tokens safely in main process or secure store; for now we log them
-            } catch (err) {
-                console.error('Spotify login failed', err)
-            }
+        getTime(): string {
+            const now = new Date();
+            return now.toLocaleTimeString();
         },
-        play() {
-            // placeholder: call existing play implementation if you have one
-            try {
-                ;(window as any).ipcRenderer.invoke('spotify-play')
-            } catch (e) {
-                console.warn('Play not implemented', e)
-            }
+    },
+    created() {
+        this.interval = setInterval(() => {
+            this.time = this.getTime();
+        }, 1000);
+    },
+    unmounted() {
+        if (this.interval) {
+            clearInterval(this.interval);
         }
     }
-}*/
-
+}
 
 </script>
 
 <template>
     <h1>Welcome to Desk Thing App</h1>
+    <h2>{{time}}</h2>
+
 </template>

@@ -1,8 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
-import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
-import setAccessToken from '../api/spotify/user.js'
+import { exec } from 'node:child_process'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -53,6 +52,7 @@ function createWindow() {
   }
 }
 
+/*
 function base64url(buffer: Buffer) {
   return buffer.toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
 }
@@ -95,11 +95,13 @@ ipcMain.handle('spotify-start-auth-inplace', async () => {
       }
     }
 
+    
     const cleanupListeners = () => {
       win?.webContents.removeListener('will-redirect', onRedirect)
       win?.webContents.removeListener('will-navigate', onNavigate)
     }
 
+    
     const onRedirect = async (event: Electron.Event, url: string) => {
       try {
         if (!url.startsWith(redirectUri)) return
@@ -123,6 +125,7 @@ ipcMain.handle('spotify-start-auth-inplace', async () => {
         }
 
         // Exchange code for tokens (PKCE) in the main process
+        
         const body = new URLSearchParams({
           grant_type: 'authorization_code',
           code,
@@ -153,6 +156,7 @@ ipcMain.handle('spotify-start-auth-inplace', async () => {
         reject(err)
       }
     }
+      
 
     const onNavigate = (event: Electron.Event, url: string) => {
       // navigation can also carry the redirect
@@ -173,24 +177,24 @@ ipcMain.handle('spotify-start-auth-inplace', async () => {
       }
     }
   })
+})*/
+
+ipcMain.handle('turn-off-screen', async() => {
+  if (!win) return;
+  try{
+    exec("echo 0 > /sys/class/backlight/rpi_backlight/brightness");
+  } catch (err) {
+    console.error('Failed to execute command:', err);
+  }
 })
 
-ipcMain.handle('spotify-play', async () => {
-  const tokens = (global as any).__spotifyTokens
-  if (!tokens) throw new Error('No Spotify tokens available')
-  const accessToken = tokens.access_token
-  const res = await fetch('https://api.spotify.com/v1/me/player/play', {
-    method: 'PUT',
-    headers: {
-      'Authorization': 'Bearer ' + accessToken,
-      'Content-Type': 'application/json',
-    },
-  })
-  if (!res.ok) {
-    const errorText = await res.text()
-    throw new Error('Spotify play request failed: ' + errorText)
+ipcMain.handle('turn-on-screen', async() => {
+  if (!win) return;
+  try{
+    exec("echo 255 > /sys/class/backlight/rpi_backlight/brightness");
+  } catch (err) {
+    console.error('Failed to execute command:', err);
   }
-  return true
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

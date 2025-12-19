@@ -1,9 +1,9 @@
 // @see - https://www.electron.build/configuration/configuration
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  "appId": "YourAppID",
+  "appId": "32",
   "asar": true,
-  "productName": "YourAppName",
+  "productName": "DeskThingApp",
   "directories": {
     "output": "release/${version}"
   },
@@ -11,23 +11,6 @@
     "dist",
     "dist-electron"
   ],
-  "mac": {
-    "target": [
-      "dmg"
-    ],
-    "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
-  },
-  "win": {
-    "target": [
-      {
-        "target": "nsis",
-        "arch": [
-          "x64"
-        ]
-      }
-    ],
-    "artifactName": "${productName}-Windows-${version}-Setup.${ext}"
-  },
   "nsis": {
     "oneClick": false,
     "perMachine": false,
@@ -39,8 +22,7 @@
       {
         "target": "deb",
         "arch": [
-          "arm64",
-          "x64"
+          "arm64"
         ]
       },
       "AppImage"

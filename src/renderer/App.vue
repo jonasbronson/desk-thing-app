@@ -1,22 +1,32 @@
-<script setup lang="ts">
+<script lang="ts">
 import Home from './components/Home.vue'
+
+export default {
+  components: {
+    Home
+  },
+  data() {
+    return {
+      screenOff: false
+    };
+  },
+  methods: {
+   async turnOffScreen() {
+      await window.ipcRenderer.invoke('turn-off-screen');
+      this.screenOff = true;
+      document.addEventListener('click', this.turnOnScreen);
+    },
+    async turnOnScreen() {
+      await window.ipcRenderer.invoke('turn-on-screen');
+      this.screenOff = false;
+      document.removeEventListener('click', this.turnOnScreen);
+    }
+  },
+}
 </script>
 
 <template>
   <Home/>
+  <button @click="turnOffScreen">Turn Off Screen</button>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
