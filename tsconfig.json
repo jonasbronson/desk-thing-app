@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "electron", "src/api/spotify/user.js", "src/api/spotify/mediaOptions.js"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "electron", "src/api/spotify/user.js", "src/api/spotify/mediaOptions.js", "src/renderer/main.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
