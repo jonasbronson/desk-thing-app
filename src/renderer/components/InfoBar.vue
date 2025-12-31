@@ -42,8 +42,8 @@ export default {
 <template>
     <div class="info-bar-container">
         <button @click="turnOffScreen" class="screen-off-button">Turn Off Screen</button>
-        <h2><a href="#">DeskThingApp</a></h2>
-        <h2><a href="#/clock">{{time}}</a></h2>
+        <h2 v-on:click="$router.push({ path: '/' })">DeskThingApp</h2>
+        <h2 v-on:click="$router.push({ path: '/clock' })">{{time}}</h2>
     </div>
 </template>
 

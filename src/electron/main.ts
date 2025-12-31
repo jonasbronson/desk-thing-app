@@ -31,7 +31,7 @@ function createWindow() {
     height: 480,
     //frame: false, // Removes the window frame (title bar)
     resizable: false, // This prevents resizing
-    fullscreen: true, // Start in fullscreen mode
+    //kiosk: true, // Fullscreen without user ability to exit
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
