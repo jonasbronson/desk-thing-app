@@ -9,8 +9,8 @@ export default {
 <template>
     <h1>Hello Little Stylus! <a>... Hello Mario</a></h1>
     <div class="app-container">
-        <div v-on:click="" class="app-option">
-            <h3 v-on:click="$router.push( {path: '/timer'} )">Pomodoro Timer</h3>
+        <div v-on:click="$router.push( {path: '/timer'} )" class="app-option">
+            <h3>Pomodoro Timer</h3>
         </div>
     </div>
 </template>

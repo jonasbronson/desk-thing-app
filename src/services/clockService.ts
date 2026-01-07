@@ -5,4 +5,8 @@ const getCurrentTime = (): string => {
     return time;
 };
 
-export { getCurrentTime, time };
+const getCurrentTimeAsNumber = (): number => {
+    return Date.now();
+};
+
+export { getCurrentTime, getCurrentTimeAsNumber, time };
