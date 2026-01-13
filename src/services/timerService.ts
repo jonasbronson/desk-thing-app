@@ -1,5 +1,5 @@
 import {getCurrentTimeAsNumber} from './clockService';
-import {ref} from "vue";
+import { ref } from 'vue';
 
 let endTime: number | null = null;
 
@@ -12,7 +12,7 @@ const startTimer = (): void => {
         const remaining = getRemainingTime();
         if (remaining !== 0 && remaining !== null) {
             timeLeft = remaining;
-            timeLeftDisplay = remainingTimeToString();
+            timeLeftDisplay.value = remainingTimeToString();
         }
         else{
             stopTimer();
@@ -36,7 +36,7 @@ const remainingTimeToString = (): string => {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-let timer: any = ref(null);
+let timer: any = null;
 
 const stopTimer = (): void => {
     if(timer === null) {
@@ -45,6 +45,6 @@ const stopTimer = (): void => {
     clearInterval(timer);
 };
 
-let timeLeftDisplay: any = ref(remainingTimeToString());
+let timeLeftDisplay = ref(remainingTimeToString());
 
 export { startTimer, getRemainingTime, remainingTimeToString, stopTimer, timeLeftDisplay };

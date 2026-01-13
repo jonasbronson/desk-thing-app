@@ -7,11 +7,6 @@
                 timeLeftDisplay,
             }
         },
-        watch: {
-            timeLeftDisplay(newValue: string) {
-                console.log("Time Left Display updated:", newValue);
-            }
-        },
         methods: {
             startTimer,
             stopTimer,
