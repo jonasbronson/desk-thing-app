@@ -1,24 +1,13 @@
 <script lang="ts">
 
-import { getCurrentTime } from '../../services/clockService.ts';
+import { time } from '../../services/clockService.ts';
 
 export default {
     data() {
         return {
-            time: getCurrentTime(),
-            interval: null as any | null,
+            time,
         };
     },
-    created() {
-        this.interval = setInterval(() => {
-            this.time = getCurrentTime();
-        }, 1000);
-    },
-    unmounted() {
-        if (this.interval) {
-            clearInterval(this.interval);
-        }
-    }
 }
 
 </script>

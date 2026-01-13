@@ -1,13 +1,12 @@
 <script lang="ts">
 
-import { getCurrentTime } from '../../services/clockService.ts';
+import { time } from '../../services/clockService.ts';
 
 export default {
     data() {
         return {
-            time: getCurrentTime(),
-            interval: null as any | null,
-            screenOff: false
+            time,
+            screenOff: false,
         };
     },
     methods: {
@@ -22,20 +21,9 @@ export default {
             document.removeEventListener('click', this.turnOnScreen);
         }
     },
-    created() {
-        this.interval = setInterval(() => {
-            this.time = getCurrentTime();
-        }, 1000);
-    },
     beforeUnmount() {
         document.removeEventListener('click', this.turnOnScreen);
     },
-    unmounted() {
-        if (this.interval) {
-            clearInterval(this.interval);
-        }
-    }
-    
 }
 </script>
 

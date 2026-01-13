@@ -1,12 +1,24 @@
-let time = new Date().toLocaleTimeString();
+import { ref } from 'vue';
+
+let time = ref(new Date().toLocaleTimeString());
 
 const getCurrentTime = (): string => {
-    time = new Date().toLocaleTimeString();
-    return time;
+    return new Date().toLocaleTimeString();
 };
 
 const getCurrentTimeAsNumber = (): number => {
     return Date.now();
 };
 
-export { getCurrentTime, getCurrentTimeAsNumber, time };
+const clock = setInterval(() => {
+    time.value = getCurrentTime();
+}, 1000);
+
+const killClock = (): void => {
+    if(clock === null) {
+        return;
+    }
+    clearInterval(clock);
+};
+
+export { time, killClock, getCurrentTimeAsNumber };
