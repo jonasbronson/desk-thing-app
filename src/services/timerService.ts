@@ -3,11 +3,21 @@ import { ref } from 'vue';
 
 let endTime: number | null = null;
 
-let timeLeft: number = 25 * 60 * 1000; // Default 25 minutes
+const timerDefault: number = 20 * 60 * 1000; // Default 20 minutes
+
+const breakDefault: number = 5 * 60 * 1000; // Default 5 minutes
+
+let timeLeft: number = timerDefault;
+
+let timerActive: any = ref(false);
+
+let breakActive: any = ref(false);
 
 const startTimer = (): void => {
-    const currentTime = getCurrentTimeAsNumber();
-    endTime = currentTime + timeLeft;
+    breakActive.value ? setEndTimer(breakDefault) : setEndTimer(timerDefault);
+    timeLeft = timeLeft === 0 ? timerDefault : timeLeft;
+    clearTimer();
+    timerActive.value = true;
     timer = setInterval(() => {
         const remaining = getRemainingTime();
         if (remaining !== 0 && remaining !== null) {
@@ -38,13 +48,42 @@ const remainingTimeToString = (): string => {
 
 let timer: any = null;
 
+const setEndTimer = (timerDuration: number): void => {
+    const currentTime = getCurrentTimeAsNumber();
+    endTime = currentTime + timerDuration;
+};
+
 const stopTimer = (): void => {
+    if(remainingTimeToString() === "00:00" && !breakActive.value) {
+        startBreak();
+    }
+    else if(remainingTimeToString() === "00:00" && breakActive.value) {
+        breakActive.value = false;
+        startTimer();
+    }
+    else{
+        clearTimer();
+        breakActive.value = false;
+        timeLeft = timerDefault;
+        timeLeftDisplay.value = remainingTimeToString();
+    }
+};
+
+const startBreak = (): void => {
+    timeLeft = breakDefault;
+    clearTimer();
+    breakActive.value = true;
+    startTimer();
+}
+
+const clearTimer = (): void => {
     if(timer === null) {
         return;
     }
+    timerActive.value = false;
     clearInterval(timer);
-};
+}
 
 let timeLeftDisplay = ref(remainingTimeToString());
 
-export { startTimer, getRemainingTime, remainingTimeToString, stopTimer, timeLeftDisplay };
+export { startTimer, startBreak, getRemainingTime, remainingTimeToString, stopTimer, timeLeftDisplay, timerActive, breakActive };

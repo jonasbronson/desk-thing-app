@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { timeLeftDisplay, startTimer, stopTimer } from "../../services/timerService.ts";
+    import { timeLeftDisplay, startTimer, startBreak, stopTimer } from "../../services/timerService.ts";
 
     export default {
         data() {
@@ -9,6 +9,7 @@
         },
         methods: {
             startTimer,
+            startBreak,
             stopTimer,
         },
     }
@@ -20,7 +21,7 @@
         <h1>{{ timeLeftDisplay }}</h1>
         <div class="options">
             <button v-on:click="startTimer()">Start Timer</button>
-            <button v-on:click="">Go To Break<br>(5 min)</button>
+            <button v-on:click="startBreak()">Go To Break<br>(5 min)</button>
             <button v-on:click="stopTimer()">Stop Timer</button>
         </div>
     </div>
